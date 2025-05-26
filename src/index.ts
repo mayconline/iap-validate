@@ -13,4 +13,4 @@ app.listen(port, () => {
   console.log('Server is running');
 });
 
-module.exports = app;
+export default app;
