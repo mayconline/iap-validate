@@ -13,8 +13,6 @@ export async function validateProductPurchase(
   try {
     const { platform, receipt } = validateBody(request.body);
 
-    console.log('Validating product purchase:', { platform, receipt });
-
     // await iap.setup();
     // const validationResponse: any = await iap.validate(receipt);
 
@@ -51,10 +49,13 @@ export async function validateProductPurchase(
     //   data: formattedPurchase,
     // });
 
-    return;
+    return response.status(200).json({
+      valid: true,
+      message: 'Product purchase validation is not implemented yet.',
+      platform,
+      receipt,
+    });
   } catch (error: any) {
-    console.error('Error validating product purchase:', error);
-
     if (error instanceof ZodError) {
       return response.status(400).json({
         valid: false,

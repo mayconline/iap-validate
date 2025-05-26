@@ -27,7 +27,6 @@ export async function validateSubscription({
       });
     }
   } catch (error: any) {
-    console.error('Error acknowledging subscription:', error);
     return {
       valid: false,
       error: error.message || 'Unknown acknowledgement error',
