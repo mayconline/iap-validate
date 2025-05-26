@@ -1,0 +1,30 @@
+{
+  "name": "iap-validator",
+  "version": "1.0.0",
+  "description": "API for validating Google Play In-App Purchases (IAP) using Google APIs",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && tsc",
+    "dev": "tsx watch ./src/index.ts",
+    "start": "NODE_ENV=production node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "google-auth-library": "^9.15.1",
+    "googleapis": "^149.0.0",
+    "in-app-purchase": "^1.11.4",
+    "zod": "^3.25.28"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/express": "5.0.0",
+    "@types/in-app-purchase": "^1.11.4",
+    "tsx": "4.19.3",
+    "typescript": "5.8.3"
+  }
+}

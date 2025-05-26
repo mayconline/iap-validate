@@ -1,0 +1,12 @@
+POST http://localhost:3000/iap/validate-purchase HTTP/1.1
+content-type: application/json
+
+{
+	"platform": "android",
+	"receipt": {
+		"packageName": "com.example.app",
+		"productId": "com.example.app.product1",
+		"purchaseToken": "purchase-token",
+		"subscription": true
+	}
+}
