@@ -1,25 +1,22 @@
 import { authGooglePlay } from '../services';
-import type { Platform } from '../types';
 
 const { androidPublisher } = authGooglePlay();
 
-type validateSubscriptionRequest = {
+type acknowledgeSubscriptionRequest = {
   acknowledgementState: number;
-  platform: Platform;
   productId: string;
   purchaseToken: string;
   packageName: string;
 };
 
-export async function validateSubscription({
-  platform,
+export async function acknowledgeSubscription({
   acknowledgementState,
   productId,
   purchaseToken,
   packageName,
-}: validateSubscriptionRequest) {
+}: acknowledgeSubscriptionRequest) {
   try {
-    if (platform === 'android' && acknowledgementState === 0) {
+    if (acknowledgementState === 0) {
       await androidPublisher.purchases.subscriptions.acknowledge({
         packageName,
         subscriptionId: productId,
@@ -27,9 +24,8 @@ export async function validateSubscription({
       });
     }
   } catch (error: any) {
-    return {
-      valid: false,
-      error: error.message || 'Unknown acknowledgement error',
-    };
+    throw new Error(
+      `Failed to acknowledge subscription: ${error || 'Unknown error'}`
+    );
   }
 }

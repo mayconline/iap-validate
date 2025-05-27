@@ -1,2 +1,2 @@
 export { validateProductPurchase } from './validateProductPurchase';
-export { validateSubscription } from './validateSubscription';
+export { acknowledgeSubscription } from './acknowledgeSubscription';

@@ -7,28 +7,15 @@ type ValidateBodyRequest = {
 };
 
 export function validateBody({ platform, receipt }: ValidateBodyRequest) {
-  const baseSchema = z.discriminatedUnion('platform', [
-    z.object({
-      platform: z.literal('ios'),
-      receipt: z.object({
-        transactionReceipt: z.object({
-          packageName: z.string(),
-          productId: z.string(),
-          purchaseToken: z.string(),
-          subscription: z.boolean(),
-        }),
-      }),
+  const baseSchema = z.object({
+    platform: z.enum(['ANDROID', 'IOS']),
+    receipt: z.object({
+      packageName: z.string(),
+      productId: z.string(),
+      purchaseToken: z.string(),
+      subscription: z.boolean(),
     }),
-    z.object({
-      platform: z.literal('android'),
-      receipt: z.object({
-        packageName: z.string(),
-        productId: z.string(),
-        purchaseToken: z.string(),
-        subscription: z.boolean(),
-      }),
-    }),
-  ]);
+  });
 
   return baseSchema.parse({ platform, receipt });
 }

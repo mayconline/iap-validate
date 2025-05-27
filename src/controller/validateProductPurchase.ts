@@ -1,5 +1,5 @@
-import { initializeIAP } from '../services';
-import { validateSubscription } from '.';
+import { getPurchaseData, initializeIAP, validateReceipt } from '../services';
+import { acknowledgeSubscription } from '.';
 import { validateBody } from '../validation';
 import type { Request, Response } from 'express';
 import { ZodError } from 'zod';
@@ -13,47 +13,33 @@ export async function validateProductPurchase(
   try {
     const { platform, receipt } = validateBody(request.body);
 
-    // await iap.setup();
-    // const validationResponse: any = await iap.validate(receipt);
+    await iap.setup();
 
-    // const purchaseData = iap.getPurchaseData(validationResponse);
+    const validationResponse = await validateReceipt(receipt, iap);
 
-    // if (!purchaseData?.length) {
-    //   return response.status(400).json({
-    //     valid: false,
-    //     error: 'No purchase data found',
-    //   });
-    // }
+    const { isValid, firstPurchaseItem } = await getPurchaseData(
+      validationResponse,
+      iap
+    );
 
-    // const firstPurchaseItem = purchaseData[0];
-    // const isValid = !!firstPurchaseItem;
+    if (platform === 'ANDROID' && receipt?.subscription) {
+      await acknowledgeSubscription({
+        acknowledgementState: validationResponse.acknowledgementState,
+        productId: firstPurchaseItem.productId,
+        purchaseToken: receipt.purchaseToken,
+        packageName: receipt.packageName,
+      });
+    }
 
-    // if (platform === 'android') {
-    //   await validateSubscription({
-    //     platform,
-    //     acknowledgementState: validationResponse.acknowledgementState,
-    //     productId: firstPurchaseItem.productId,
-    //     purchaseToken: receipt.purchaseToken,
-    //     packageName: receipt.packageName,
-    //   });
-    // }
-
-    // const formattedPurchase = {
-    //   platform,
-    //   isValid,
-    //   ...firstPurchaseItem,
-    // };
-
-    // return response.status(200).json({
-    //   valid: isValid,
-    //   data: formattedPurchase,
-    // });
+    const formattedPurchase = {
+      platform,
+      isValid,
+      ...firstPurchaseItem,
+    };
 
     return response.status(200).json({
-      valid: true,
-      message: 'Product purchase validation is not implemented yet.',
-      platform,
-      receipt,
+      valid: isValid,
+      data: formattedPurchase,
     });
   } catch (error: any) {
     if (error instanceof ZodError) {
@@ -62,5 +48,10 @@ export async function validateProductPurchase(
         error: error.errors,
       });
     }
+
+    return response.status(400).json({
+      valid: false,
+      error: error.message || 'Unknown validation error',
+    });
   }
 }

@@ -1,3 +1,3 @@
 export { env } from './env';
 export { authGooglePlay } from './authGooglePlay';
-export { initializeIAP } from './iap';
+export { initializeIAP, validateReceipt, getPurchaseData } from './iap';
