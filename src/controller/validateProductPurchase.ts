@@ -33,7 +33,6 @@ export async function validateProductPurchase(
 
     const formattedPurchase = {
       platform,
-      isValid,
       ...firstPurchaseItem,
     };
 

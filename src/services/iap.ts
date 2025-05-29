@@ -1,6 +1,6 @@
 import iap from 'in-app-purchase';
 import { env } from './env';
-import type { Receipt } from '../types';
+import type { PurchaseData, Receipt, ValidateReceiptIAP } from '../types';
 
 const iapTestMode = env.IAP_TEST_MODE === 'true';
 
@@ -31,7 +31,10 @@ function initializeIAP() {
   }
 }
 
-async function validateReceipt(receipt: Receipt, iap: any) {
+async function validateReceipt(
+  receipt: Receipt,
+  iap: any
+): Promise<ValidateReceiptIAP> {
   if (!receipt || !iap) {
     throw new Error('Receipt and IAP module are required for validation');
   }
@@ -51,7 +54,9 @@ async function getPurchaseData(validateReceipt: any, iap: any) {
   }
 
   try {
-    const purchaseData = await iap.getPurchaseData(validateReceipt);
+    const purchaseData: PurchaseData[] = await iap.getPurchaseData(
+      validateReceipt
+    );
 
     if (!purchaseData?.length) {
       throw new Error('No purchase data found');

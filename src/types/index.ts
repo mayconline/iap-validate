@@ -5,6 +5,63 @@ type Receipt = {
   subscription: boolean;
 };
 
-type Platform = 'android' | 'ios';
+type Platform = 'ANDROID' | 'IOS';
 
-export type { Receipt, Platform };
+type PurchaseData = {
+  service: string;
+  status: number;
+  packageName: string;
+  productId: string;
+  purchaseToken: string;
+  startTimeMillis: number;
+  expiryTimeMillis: number;
+  autoRenewing: boolean;
+  priceCurrencyCode: string;
+  priceAmountMicros: number;
+  countryCode: string;
+  developerPayload: null | string;
+  cancelReason: number;
+  orderId: string;
+  purchaseType: number;
+  acknowledgementState: number;
+  kind: string;
+  transactionId: string;
+  quantity: number;
+  expirationDate: string;
+  cancellationDate: string;
+};
+
+type ValidateReceiptIAP = {
+  service: string;
+  status: number;
+  packageName: string;
+  productId: string;
+  purchaseToken: string;
+  startTimeMillis: string;
+  expiryTimeMillis: string;
+  autoRenewing: boolean;
+  priceCurrencyCode: string;
+  priceAmountMicros: string;
+  countryCode: string;
+  developerPayload: string;
+  cancelReason: number;
+  orderId: string;
+  purchaseType: number;
+  acknowledgementState: number;
+  kind: string;
+};
+
+type ValidatedProductPurchaseResponse = {
+  valid: boolean;
+  data?: {
+    platform: Platform;
+  } & PurchaseData;
+};
+
+export type {
+  Receipt,
+  Platform,
+  PurchaseData,
+  ValidateReceiptIAP,
+  ValidatedProductPurchaseResponse,
+};
