@@ -162,5 +162,3 @@ vercel.json - File for vercel know that it is a serverless function
 ## License
 
 ISC
-
-This README provides a comprehensive overview of your project, including setup instructions, API documentation, and key technologies used. Let me know if you'd like any sections expanded or modified!
