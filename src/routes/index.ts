@@ -20,7 +20,12 @@ routes.post(
 );
 
 routes.get('/api', (_, res: Response) => {
-  res.status(200).json({ message: 'API is running' });
+  res
+    .status(200)
+    .json({
+      message: 'API is running',
+      documentation: 'https://github.com/mayconline/iap-validate',
+    });
 });
 
 export default routes;
