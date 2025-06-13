@@ -1,12 +1,13 @@
 POST http://localhost:3000/iap/validate-purchase HTTP/1.1
 content-type: application/json
+Authorization: Bearer Token
 
 {
-	"platform": "android",
+	"platform": "ANDROID",
 	"receipt": {
-		"packageName": "com.example.app",
-		"productId": "com.example.app.product1",
-		"purchaseToken": "purchase-token",
-		"subscription": true
+		"packageName": "your.package.name",
+		"productId": "your_product_id",
+		"purchaseToken": "your_purchase_token",
+		"subscription": true //"if subscription true else false"
 	}
 }
