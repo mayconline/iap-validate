@@ -10,6 +10,7 @@ API for validating Google Play In-App Purchases (IAP) using Google APIs.
 - Environment configuration with dotenv
 - Google Play Store API integration
 - Subscription acknowledgement support
+- Vercel hosting setup
 
 ## Prerequisites
 
@@ -126,6 +127,26 @@ Authorization: Bearer <jwt-token>
 - [googleapis](https://github.com/googleapis/google-api-nodejs-client) - Google APIs client
 - [in-app-purchase](https://github.com/voltrue2/in-app-purchase) - IAP validation library
 - [Biome](https://biomejs.dev/) - Code formatting and linting
+
+## References
+
+- [react-native-iap](https://github.com/hyochan/react-native-iap) - In-App Purchase Library for React Native
+- [developer-android-google](https://developer.android.com/google/play/billing/integrate?hl=pt-br#subscriptions) - Doc to integrate IAP
+- [in-app-subscription-example](https://github.com/mifi/in-app-subscription-example) - Example integration
+- [Vercel Node JS Setup](https://vercel.com/guides/using-express-with-vercel) - Doc for deploying Node JS on Vercel
+
+## Vercel Hosting Setup Requirement
+
+1. Config variables in vercel
+2. keep structured folders
+
+```sh
+
+src/index.ts - export default app
+api/index.ts - import app and export default app, important if vercel has been throw error "Error: No Output Directory named "api" found after the Build completed."
+vercel.json - File for vercel know that it is a serverless function
+
+```
 
 ## License
 
