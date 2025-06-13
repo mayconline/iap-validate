@@ -20,7 +20,7 @@ routes.post(
 );
 
 routes.get(
-  '/',
+  '/api',
   (req: Request, res: Response, next: NextFunction) => {
     validateToken(req, res, next);
   },
