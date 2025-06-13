@@ -19,4 +19,14 @@ routes.post(
   }
 );
 
+routes.get(
+  '/',
+  (req: Request, res: Response, next: NextFunction) => {
+    validateToken(req, res, next);
+  },
+  (req: Request, res: Response) => {
+    res.status(200).json({ message: 'API is running' });
+  }
+);
+
 export default routes;
