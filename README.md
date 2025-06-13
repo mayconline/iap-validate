@@ -36,7 +36,7 @@ cp .env.example .env
 Required environment variables:
 
 ```sh
-GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Private-Key\n-----END PRIVATE KEY-----\n"
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Private-Key\n-----END PRIVATE KEY-----\n" # note: with " "
 GOOGLE_CLIENT_EMAIL=your-service-account@project.iam.gserviceaccount.com
 PORT=3000
 APPLE_SHARED_SECRET=your-shared-secret
@@ -138,6 +138,17 @@ Authorization: Bearer <jwt-token>
 ## Vercel Hosting Setup Requirement
 
 1. Config variables in vercel
+
+```sh
+GOOGLE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nYour-Private-Key\n-----END PRIVATE KEY-----\n  # note: without " "
+GOOGLE_CLIENT_EMAIL=your-service-account@project.iam.gserviceaccount.com
+PORT=3000
+APPLE_SHARED_SECRET=your-shared-secret
+IAP_TEST_MODE=false
+JWT_TOKEN=your-jwt-secret
+
+```
+
 2. keep structured folders
 
 ```sh
