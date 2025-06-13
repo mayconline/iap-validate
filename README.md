@@ -131,7 +131,7 @@ Authorization: Bearer <jwt-token>
 ## References
 
 - [react-native-iap](https://github.com/hyochan/react-native-iap) - In-App Purchase Library for React Native
-- [developer-android-google](https://developer.android.com/google/play/billing/integrate?hl=pt-br#subscriptions) - Doc to integrate IAP
+- [Developer Android Google](https://developer.android.com/google/play/billing/integrate?hl=pt-br#subscriptions) - Doc to integrate IAP
 - [in-app-subscription-example](https://github.com/mifi/in-app-subscription-example) - Example integration
 - [Vercel Node JS Setup](https://vercel.com/guides/using-express-with-vercel) - Doc for deploying Node JS on Vercel
 
@@ -149,7 +149,7 @@ JWT_TOKEN=your-jwt-secret
 
 ```
 
-2. keep structured folders
+2. Keep structured folders
 
 ```sh
 
