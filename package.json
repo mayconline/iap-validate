@@ -7,13 +7,13 @@
     "clean": "rm -rf ./dist",
     "build": "npm run clean && tsc",
     "dev": "tsx watch ./src/index.ts",
-    "start": "NODE_ENV=production node dist/src/index.js"
+    "start": "NODE_ENV=production node dist/src/index.js",
+    "test": "jest --maxWorkers=50%"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "google-auth-library": "^9.15.1",
     "googleapis": "^149.0.0",
@@ -24,10 +24,15 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@jest/globals": "^30.0.2",
     "@types/express": "5.0.0",
     "@types/in-app-purchase": "^1.11.4",
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.15.21",
     "@types/swagger-ui-express": "^4.1.8",
+    "dotenv": "^16.5.0",
+    "jest": "^30.0.2",
+    "ts-jest": "^29.4.0",
     "tsx": "4.19.3",
     "typescript": "5.8.3"
   }

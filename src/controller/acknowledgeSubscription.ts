@@ -1,13 +1,5 @@
 import { authGooglePlay } from '../services';
-
-const { androidPublisher } = authGooglePlay();
-
-type acknowledgeSubscriptionRequest = {
-  acknowledgementState: number;
-  productId: string;
-  purchaseToken: string;
-  packageName: string;
-};
+import type { acknowledgeSubscriptionRequest } from '../types';
 
 export async function acknowledgeSubscription({
   acknowledgementState,
@@ -17,6 +9,8 @@ export async function acknowledgeSubscription({
 }: acknowledgeSubscriptionRequest) {
   try {
     if (acknowledgementState === 0) {
+      const { androidPublisher } = authGooglePlay();
+
       await androidPublisher.purchases.subscriptions.acknowledge({
         packageName,
         subscriptionId: productId,
