@@ -58,10 +58,18 @@ type ValidatedProductPurchaseResponse = {
   } & PurchaseData;
 };
 
+type acknowledgeSubscriptionRequest = {
+  acknowledgementState: number;
+  productId: string;
+  purchaseToken: string;
+  packageName: string;
+};
+
 export type {
   Receipt,
   Platform,
   PurchaseData,
   ValidateReceiptIAP,
   ValidatedProductPurchaseResponse,
+  acknowledgeSubscriptionRequest,
 };
