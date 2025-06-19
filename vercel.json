@@ -1,14 +1,4 @@
 {
   "version": 2,
-  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
-  "builds": [
-    {
-      "src": "src/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["./dist/**", "./node_modules/swagger-ui-dist/**"]
-      }
-    }
-  ],
-  "routes": [{ "src": "/(.*)", "dest": "src/index.ts" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
 }

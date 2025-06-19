@@ -9,23 +9,9 @@ import swaggerUi from 'swagger-ui-express';
 const app = express();
 const port = env.PORT || 3000;
 
-// Setup Swagger UI with CDN
-const swaggerOptions = {
-  customCssUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.19.1/swagger-ui.min.css',
-  customJs: [
-    'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.19.1/swagger-ui-bundle.min.js',
-  ],
-  customfavIcon: 'https://swagger.io/favicon.ico',
-};
-
 app.use(express.json());
 app.use(routes);
-app.use(
-  '/api/docs',
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, swaggerOptions)
-);
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
   console.log('Server is running');
