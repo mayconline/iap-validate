@@ -1,0 +1,267 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "IAP Validator API",
+    "version": "1.0.0",
+    "description": "API for validating in-app purchases",
+    "license": {
+      "name": "Licensed Under MIT",
+      "url": "https://spdx.org/licenses/MIT.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Development"
+    },
+    {
+      "url": "https://iap-validate-xi.vercel.app/api",
+      "description": "Production"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "ValidatePurchaseRequest": {
+        "type": "object",
+        "required": ["platform", "receipt"],
+        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": ["ANDROID"],
+            "description": "The platform of the purchase (currently only ANDROID is supported)"
+          },
+          "receipt": {
+            "type": "object",
+            "required": [
+              "packageName",
+              "productId",
+              "purchaseToken",
+              "subscription"
+            ],
+            "properties": {
+              "packageName": {
+                "type": "string",
+                "description": "The package name of the app"
+              },
+              "productId": {
+                "type": "string",
+                "description": "The ID of the product being purchased"
+              },
+              "purchaseToken": {
+                "type": "string",
+                "description": "The purchase token from Google Play"
+              },
+              "subscription": {
+                "type": "boolean",
+                "description": "Whether this is a subscription purchase"
+              }
+            }
+          }
+        }
+      },
+      "ValidatePurchaseResponse": {
+        "type": "object",
+        "required": ["valid", "data"],
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "description": "Indicates if the purchase is valid"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "platform": {
+                "type": "string",
+                "description": "Platform of the purchase"
+              },
+              "service": {
+                "type": "string",
+                "description": "Service provider (e.g., google)"
+              },
+              "status": {
+                "type": "integer",
+                "description": "Status code of the purchase"
+              },
+              "packageName": {
+                "type": "string",
+                "description": "Package name of the app"
+              },
+              "productId": {
+                "type": "string",
+                "description": "Product identifier"
+              },
+              "purchaseToken": {
+                "type": "string",
+                "description": "Token of the purchase"
+              },
+              "startTimeMillis": {
+                "type": "integer",
+                "description": "Purchase start time in milliseconds"
+              },
+              "expiryTimeMillis": {
+                "type": "integer",
+                "description": "Purchase expiry time in milliseconds"
+              },
+              "autoRenewing": {
+                "type": "boolean",
+                "description": "Whether the subscription auto-renews"
+              },
+              "priceCurrencyCode": {
+                "type": "string",
+                "description": "Currency code of the price"
+              },
+              "priceAmountMicros": {
+                "type": "integer",
+                "description": "Price in micros"
+              },
+              "countryCode": {
+                "type": "string",
+                "description": "Country code of the purchase"
+              },
+              "developerPayload": {
+                "type": ["string", "null"],
+                "description": "Developer payload data"
+              },
+              "cancelReason": {
+                "type": "integer",
+                "description": "Reason code for cancellation"
+              },
+              "orderId": {
+                "type": "string",
+                "description": "Order identifier"
+              },
+              "purchaseType": {
+                "type": "integer",
+                "description": "Type of purchase"
+              },
+              "acknowledgementState": {
+                "type": "integer",
+                "description": "State of purchase acknowledgement"
+              },
+              "kind": {
+                "type": "string",
+                "description": "Kind of purchase"
+              },
+              "transactionId": {
+                "type": "string",
+                "description": "Transaction identifier"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "Quantity purchased"
+              },
+              "expirationDate": {
+                "type": "string",
+                "description": "Expiration date in milliseconds"
+              },
+              "cancellationDate": {
+                "type": "string",
+                "description": "Cancellation date in milliseconds"
+              }
+            }
+          }
+        }
+      }
+    },
+    "examples": {
+      "ValidatePurchaseRequestExample": {
+        "value": {
+          "platform": "ANDROID",
+          "receipt": {
+            "packageName": "com.rebalanceei",
+            "productId": "rebalanceei_premium_anual_2024",
+            "purchaseToken": "example.token.string",
+            "subscription": true
+          }
+        }
+      },
+      "ValidatePurchaseResponseExample": {
+        "value": {
+          "valid": true,
+          "data": {
+            "platform": "ANDROID",
+            "service": "google",
+            "status": 0,
+            "packageName": "com.yourapp",
+            "productId": "your_product_id",
+            "purchaseToken": "purchase_token",
+            "startTimeMillis": 1748567329531,
+            "expiryTimeMillis": 1748579961072,
+            "autoRenewing": false,
+            "priceCurrencyCode": "BRL",
+            "priceAmountMicros": 215880000,
+            "countryCode": "BR",
+            "developerPayload": null,
+            "cancelReason": 1,
+            "orderId": "GPA.XXXX-XXXX-XXXX-XXXX",
+            "purchaseType": 0,
+            "acknowledgementState": 1,
+            "kind": "androidpublisher#subscriptionPurchase",
+            "transactionId": "transaction_token",
+            "quantity": 1,
+            "expirationDate": "1748579961072",
+            "cancellationDate": "1748579961072"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/validate-purchase": {
+      "post": {
+        "summary": "Validate a product purchase",
+        "tags": ["Purchase"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidatePurchaseRequest"
+              },
+              "examples": {
+                "androidSubscription": {
+                  "$ref": "#/components/examples/ValidatePurchaseRequestExample"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Purchase validated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidatePurchaseResponse"
+                },
+                "examples": {
+                  "successResponse": {
+                    "$ref": "#/components/examples/ValidatePurchaseResponseExample"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid token"
+          },
+          "400": {
+            "description": "Bad request - Invalid input parameters"
+          }
+        }
+      }
+    }
+  }
+}

@@ -59,6 +59,10 @@ pnpm build
 pnpm start
 ```
 
+## Swagger Docs
+
+- [Documentation](https://iap-validate-xi.vercel.app/api/docs)
+
 ## API Endpoints
 
 1. Validate Purchase
@@ -127,6 +131,7 @@ Authorization: Bearer <jwt-token>
 - [googleapis](https://github.com/googleapis/google-api-nodejs-client) - Google APIs client
 - [in-app-purchase](https://github.com/voltrue2/in-app-purchase) - IAP validation library
 - [Biome](https://biomejs.dev/) - Code formatting and linting
+- [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express) - Documentation Library
 
 ## References
 

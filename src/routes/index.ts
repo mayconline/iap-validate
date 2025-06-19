@@ -7,8 +7,10 @@ import {
 import { validateProductPurchase } from '../controller';
 import { validateToken } from '../middleware';
 
-const routes: Router = Router();
+import swaggerDocument from '../../doc/openapi.json';
+import swaggerUi from 'swagger-ui-express';
 
+const routes: Router = Router();
 routes.post(
   '/api/validate-purchase',
   (req: Request, res: Response, next: NextFunction) => {
@@ -25,5 +27,7 @@ routes.get('/api/health', (_, res: Response) => {
     documentation: 'https://github.com/mayconline/iap-validate',
   });
 });
+
+routes.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default routes;
