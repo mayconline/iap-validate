@@ -9,4 +9,5 @@ module.exports = {
     ...tsJestTransformCfg,
   },
   setupFilesAfterEnv: ['./jest.setup.js'],
+  testMatch: ['<rootDir>/tests/*.test.ts'],
 };
