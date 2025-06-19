@@ -3,7 +3,7 @@
   "info": {
     "title": "IAP Validator API",
     "version": "1.0.0",
-    "description": "API for validating in-app purchases",
+    "description": "API for validating in-app purchases. Check out our [GitHub Repository](https://github.com/mayconline/iap-validate/) for more information.",
     "license": {
       "name": "Licensed Under MIT",
       "url": "https://spdx.org/licenses/MIT.html"
