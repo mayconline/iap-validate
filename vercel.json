@@ -6,7 +6,7 @@
       "src": "src/index.ts",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": "./node_modules/swagger-ui-express/**"
+        "includeFiles": "./node_modules/swagger-ui-dist/**"
       }
     }
   ]
