@@ -10,5 +10,5 @@
       }
     }
   ],
-  "routes": [{ "src": "/(.*)", "dest": "dist/src/index.ts" }]
+  "routes": [{ "src": "/(.*)", "dest": "src/index.ts" }]
 }
