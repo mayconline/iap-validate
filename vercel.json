@@ -1,11 +1,4 @@
 {
   "version": 2,
-  "rewrites": [
-    {
-      "source": "/api/docs/swagger-ui/(.*)",
-      "destination": "/api/docs/swagger-ui/$1"
-    },
-    { "source": "/api/docs/(.*)", "destination": "/api" },
-    { "source": "/(.*)", "destination": "/api" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
 }
