@@ -64,7 +64,7 @@ pnpm start
 1. Validate Purchase
 
 ```sh
-POST /iap/validate-purchase
+POST /api/validate-purchase
 ```
 
 2. Headers:

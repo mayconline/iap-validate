@@ -10,7 +10,7 @@ import { validateToken } from '../middleware';
 const routes: Router = Router();
 
 routes.post(
-  '/iap/validate-purchase',
+  '/api/validate-purchase',
   (req: Request, res: Response, next: NextFunction) => {
     validateToken(req, res, next);
   },
@@ -19,13 +19,11 @@ routes.post(
   }
 );
 
-routes.get('/api', (_, res: Response) => {
-  res
-    .status(200)
-    .json({
-      message: 'API is running',
-      documentation: 'https://github.com/mayconline/iap-validate',
-    });
+routes.get('/api/health', (_, res: Response) => {
+  res.status(200).json({
+    message: 'API is running',
+    documentation: 'https://github.com/mayconline/iap-validate',
+  });
 });
 
 export default routes;
